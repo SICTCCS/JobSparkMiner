@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Spark Contest - SICTC</title>
+    <style>
+        /* 
+           Simple, clean base design.
+           Colors are kept neutral with a blue accent so you can easily tweak them later.
+        */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .form-container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            max-width: 750px; /* Great width for a 17-inch screen */
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-top: 0;
+        }
+
+        p.subtitle {
+            text-align: center;
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label.field-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        input[type="email"], select {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+            background-color: #fafafa;
+        }
+
+        /* Checkbox grid layout - uses 3 columns on larger screens */
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .checkbox-group input {
+            margin-right: 10px;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .radio-group label {
+            margin-right: 20px;
+            font-size: 1.1em;
+            cursor: pointer;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 16px;
+            background-color: #3498db; /* Tweak this color to match your branding */
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        /* Toast Popup Notification */
+        .toast {
+            visibility: hidden;
+            background-color: #2ecc71;
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 20px 40px;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h1>Job Spark Contest Entry</h1>
+        <p class="subtitle">Enter your information below to win a free SICTC t-shirt! <br>If you win, the shirt will be sent directly to your school.</p>
+        
+        <form id="contestForm">
+            <!-- Email -->
+            <div class="form-group">
+                <label class="field-label" for="email">Email Address</label>
+                <input type="email" id="email" name="email" required placeholder="student@example.com">
+            </div>
+
+            <!-- School -->
+            <div class="form-group">
+                <label class="field-label" for="school">School</label>
+                <select id="school" name="school" required>
+                    <option value="">-- Select Your School --</option>
+                    <optgroup label="EVSC Schools">
+                        <option value="Bosse High School">Bosse High School</option>
+                        <option value="Central High School">Central High School</option>
+                        <option value="Harrison High School">Harrison High School</option>
+                        <option value="North High School">North High School</option>
+                        <option value="Reitz High School">Reitz High School</option>
+                        <option value="New Tech Institute">New Tech Institute</option>
+                        <option value="Academy of Science & Medicine">Academy of Science & Medicine</option>
+                    </optgroup>
+                    <optgroup label="Other">
+                        <option value="Other">Other / Non-EVSC</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <!-- Conditional Options Fair Question (Hidden by default) -->
+            <div class="form-group hidden" id="optionsFairGroup">
+                <label class="field-label">Did you see us at the EVSC Options Fair?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="optionsFair" value="yes"> Yes</label>
+                    <label><input type="radio" name="optionsFair" value="no"> No</label>
+                </div>
+            </div>
+
+            <!-- Shirt Size -->
+            <div class="form-group">
+                <label class="field-label" for="shirtSize">T-Shirt Size</label>
+                <select id="shirtSize" name="shirtSize" required>
+                    <option value="">-- Select Size --</option>
+                    <option value="Small">Small</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Large">Large</option>
+                    <option value="X-Large">X-Large</option>
+                    <option value="XX-Large">XX-Large</option>
+                </select>
+            </div>
+
+            <!-- 3 Programs -->
+            <div class="form-group">
+                <label class="field-label">Select up to 3 programs that sound interesting to you:</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="programs" value="Advanced Manufacturing" class="program-cb"> Advanced Manufacturing</label>
+                    <label><input type="checkbox" name="programs" value="Animal Science" class="program-cb"> Animal Science</label>
+                    <label><input type="checkbox" name="programs" value="Architecture" class="program-cb"> Architecture (PLTW)</label>
+                    <label><input type="checkbox" name="programs" value="Automotive Services" class="program-cb"> Automotive Services</label>
+                    <label><input type="checkbox" name="programs" value="Building Trades" class="program-cb"> Building Trades</label>
+                    <label><input type="checkbox" name="programs" value="Computer Network" class="program-cb"> Computer Network Tech</label>
+                    <label><input type="checkbox" name="programs" value="Computer Science" class="program-cb"> Computer Science</label>
+                    <label><input type="checkbox" name="programs" value="Cosmetology" class="program-cb"> Cosmetology & Barbering</label>
+                    <label><input type="checkbox" name="programs" value="Culinary Arts" class="program-cb"> Culinary Arts</label>
+                    <label><input type="checkbox" name="programs" value="Diesel Service" class="program-cb"> Diesel Service</label>
+                    <label><input type="checkbox" name="programs" value="Engineering" class="program-cb"> Engineering (PLTW)</label>
+                    <label><input type="checkbox" name="programs" value="Graphic Communication" class="program-cb"> Graphic Communication</label>
+                    <label><input type="checkbox" name="programs" value="Health Sciences" class="program-cb"> Health Sciences</label>
+                    <label><input type="checkbox" name="programs" value="HVAC-R" class="program-cb"> HVAC-R</label>
+                    <label><input type="checkbox" name="programs" value="Precision Machine" class="program-cb"> Precision Machine</label>
+                    <label><input type="checkbox" name="programs" value="Public Safety" class="program-cb"> Public Safety / Law</label>
+                    <label><input type="checkbox" name="programs" value="Radio/TV" class="program-cb"> Radio / TV Broadcasting</label>
+                    <label><input type="checkbox" name="programs" value="Welding" class="program-cb"> Welding Technology</label>
+                </div>
+            </div>
+
+            <button type="submit">Enter Drawing</button>
+        </form>
+    </div>
+
+    <!-- The Toast Notification -->
+    <div id="successToast" class="toast">
+        🎉 Success! You've been entered into the drawing.
+    </div>
+
+    <script>
+        // 1. Conditional Logic for the "Options Fair" question
+        const schoolSelect = document.getElementById('school');
+        const optionsFairGroup = document.getElementById('optionsFairGroup');
+        const optionsFairRadios = document.getElementsByName('optionsFair');
+        
+        // List of EVSC schools to trigger the condition
+        const evscSchools = [
+            "Bosse High School", "Central High School", "Harrison High School", 
+            "North High School", "Reitz High School", "New Tech Institute", 
+            "Academy of Science & Medicine"
+        ];
+
+        schoolSelect.addEventListener('change', function() {
+            if (evscSchools.includes(this.value)) {
+                optionsFairGroup.classList.remove('hidden');
+                optionsFairRadios[0].required = true; // Make radio required
+            } else {
+                optionsFairGroup.classList.add('hidden');
+                optionsFairRadios[0].required = false; // Remove requirement
+                optionsFairRadios.forEach(radio => radio.checked = false); // Clear selection
+            }
+        });
+
+        // 2. Limit the program selection to a maximum of 3
+        const checkboxes = document.querySelectorAll('.program-cb');
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', function() {
+                const checkedCount = document.querySelectorAll('.program-cb:checked').length;
+                if (checkedCount > 3) {
+                    this.checked = false;
+                    alert('Please select a maximum of 3 programs.');
+                }
+            });
+        });
+
+        // 3. Handle Form Submission
+        const contestForm = document.getElementById('contestForm');
+        const successToast = document.getElementById('successToast');
+
+        contestForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Stop page from refreshing
+
+            // Ensure they selected at least 1 program
+            const checkedCount = document.querySelectorAll('.program-cb:checked').length;
+            if (checkedCount === 0) {
+                alert('Please select at least 1 program that sounds interesting.');
+                return;
+            }
+
+            /* ---------------------------------------------------------
+               FUTURE BACKEND STEP: SEND DATA & CONFIRMATION EMAIL 
+               This is where you'll pass data to your Flask application.
+               
+               Example Fetch API call to your Flask route:
+               
+               const formData = new FormData(contestForm);
+               fetch('/api/submit-contest', {
+                   method: 'POST',
+                   body: formData
+               })
+               .then(response => response.json())
+               .then(data => {
+                   // Only show toast if submission was successful
+               })
+               .catch(error => console.error('Error:', error));
+            --------------------------------------------------------- */
+
+            // 4. Show the Toast Pop-up naturally
+            successToast.classList.add('show');
+            
+            // Hide the toast after 3.5 seconds
+            setTimeout(() => {
+                successToast.classList.remove('show');
+            }, 3500);
+
+            // 5. Clear the form for the next student
+            contestForm.reset();
+            
+            // Re-hide the options fair question since form reset drops the school value
+            optionsFairGroup.classList.add('hidden');
+            optionsFairRadios[0].required = false;
+        });
+    </script>
+</body>
+</html>
