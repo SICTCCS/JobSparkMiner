@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0b1020">
+  <meta name="theme-color" content="#f4f7f5">
   <title>SICTC T-Shirt Giveaway</title>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -12,11 +12,10 @@
     <div class="ambient ambient-one" aria-hidden="true"></div>
     <div class="ambient ambient-two" aria-hidden="true"></div>
 
-    <section class="form-card" aria-labelledby="page-title">
+    <section class="intro-panel" aria-labelledby="page-title">
       <div class="brand-row">
-        <div class="brand-mark" aria-hidden="true">S</div>
-        <div>
-          <p class="eyebrow">SOUTHERN INDIANA CAREER &amp; TECHNICAL CENTER</p>
+        <img class="brand-logo" src="assets/images/sictc-logo.png" alt="Southern Indiana Career &amp; Technical Center">
+        <div class="brand-words">
           <p class="brand-caption">Explore what you could create.</p>
         </div>
       </div>
@@ -26,57 +25,67 @@
         <h1 id="page-title">Enter to win a SICTC t-shirt <span>— and other fun things!</span></h1>
         <p class="intro-copy">Tell us a little about yourself and which programs caught your attention. Fill out the form below to enter.</p>
       </div>
+      <footer class="page-footer">Curiosity starts somewhere. <span>Start here.</span></footer>
+    </section>
 
-      <div class="divider"></div>
-
-      <form id="giveaway-form" action="#" method="post">
-        <div class="section-heading">
-          <span class="section-number">01</span>
-          <div>
-            <h2>About you</h2>
-            <p>Just the basics so we know how to reach you.</p>
+    <section class="form-card" aria-label="Giveaway entry form">
+      <form id="giveaway-form" class="form-layout" action="#" method="post">
+        <section class="form-section about-section" aria-labelledby="about-heading">
+          <div class="section-heading">
+            <span class="section-number">01</span>
+            <div>
+              <h2 id="about-heading">About you</h2>
+              <p>Just the basics so we know how to reach you.</p>
+            </div>
           </div>
-        </div>
 
-        <div class="field">
-          <label for="email">Email address <span class="required">*</span></label>
-          <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
-        </div>
+          <div class="basic-fields">
+            <div class="field">
+              <label for="full-name">Full name <span class="required">*</span></label>
+              <input id="full-name" name="full_name" type="text" placeholder="Your full name" autocomplete="name" required>
+            </div>
 
-        <div class="field">
-          <label for="school">School <span class="required">*</span></label>
-          <input id="school" name="school" type="text" placeholder="Enter your school name" autocomplete="organization" required>
-        </div>
+            <div class="field">
+              <label for="email">Email address <span class="required">*</span></label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+            </div>
 
-        <div class="field">
-          <label for="shirt-size">T-shirt size <span class="required">*</span></label>
-          <div class="select-wrap">
-            <select id="shirt-size" name="shirt_size" required>
-              <option value="" disabled selected>Select your size</option>
-              <option value="Youth S">Youth Small</option>
-              <option value="Youth M">Youth Medium</option>
-              <option value="Youth L">Youth Large</option>
-              <option value="Adult XS">Adult XS</option>
-              <option value="Adult S">Adult Small</option>
-              <option value="Adult M">Adult Medium</option>
-              <option value="Adult L">Adult Large</option>
-              <option value="Adult XL">Adult XL</option>
-              <option value="Adult 2XL">Adult 2XL</option>
-              <option value="Adult 3XL">Adult 3XL</option>
-            </select>
+            <div class="field">
+              <label for="school">Current school <span class="required">*</span></label>
+              <input id="school" name="school" type="text" placeholder="Enter your school name" autocomplete="organization" required>
+            </div>
+
+            <div class="field">
+              <label for="shirt-size">T-shirt size <span class="required">*</span></label>
+              <div class="select-wrap">
+                <select id="shirt-size" name="shirt_size" required>
+                  <option value="" disabled selected>Select your size</option>
+                  <option value="Youth S">Youth Small</option>
+                  <option value="Youth M">Youth Medium</option>
+                  <option value="Youth L">Youth Large</option>
+                  <option value="Adult XS">Adult XS</option>
+                  <option value="Adult S">Adult Small</option>
+                  <option value="Adult M">Adult Medium</option>
+                  <option value="Adult L">Adult Large</option>
+                  <option value="Adult XL">Adult XL</option>
+                  <option value="Adult 2XL">Adult 2XL</option>
+                  <option value="Adult 3XL">Adult 3XL</option>
+                </select>
+              </div>
+            </div>
           </div>
-          <p class="field-hint">Choose the size you would want if you win.</p>
-        </div>
+        </section>
 
-        <div class="section-heading section-spaced">
-          <span class="section-number">02</span>
-          <div>
-            <h2>What interests you?</h2>
-            <p>Pick three SICTC programs you’d like to learn more about.</p>
+        <section class="form-section programs-section" aria-labelledby="programs-heading">
+          <div class="section-heading">
+            <span class="section-number">02</span>
+            <div>
+              <h2 id="programs-heading">What interests you?</h2>
+              <p>Pick three SICTC programs you’d like to learn more about.</p>
+            </div>
           </div>
-        </div>
 
-        <div class="program-grid">
+          <div class="program-grid">
           <div class="field">
             <label for="program-1">Program choice 1 <span class="required">*</span></label>
             <div class="select-wrap">
@@ -161,52 +170,55 @@
               </select>
             </div>
           </div>
-        </div>
-
-        <div class="section-heading section-spaced">
-          <span class="section-number">03</span>
-          <div>
-            <h2>One quick question</h2>
-            <p>This section only applies to EVSC students.</p>
           </div>
-        </div>
+        </section>
 
-        <fieldset class="choice-panel">
-          <legend>Are you an EVSC student? <span class="required">*</span></legend>
-          <div class="radio-row">
-            <label class="radio-option">
-              <input type="radio" name="evsc_student" value="yes" required>
-              <span class="radio-custom"></span>
-              <span>Yes, I am</span>
-            </label>
-            <label class="radio-option">
-              <input type="radio" name="evsc_student" value="no" required>
-              <span class="radio-custom"></span>
-              <span>No, I’m not</span>
-            </label>
+        <section class="form-section student-section" aria-labelledby="student-heading">
+          <div class="section-heading">
+            <span class="section-number">03</span>
+            <div>
+              <h2 id="student-heading">One quick question</h2>
+              <p>This section only applies to EVSC students.</p>
+            </div>
           </div>
-        </fieldset>
 
-        <div id="options-fair-field" class="field conditional-field" hidden>
-          <label>Did you see us at the Options Fair? <span class="required">*</span></label>
-          <div class="radio-row">
-            <label class="radio-option">
-              <input type="radio" name="options_fair" value="yes">
-              <span class="radio-custom"></span>
-              <span>Yes</span>
-            </label>
-            <label class="radio-option">
-              <input type="radio" name="options_fair" value="no">
-              <span class="radio-custom"></span>
-              <span>No</span>
-            </label>
-            <label class="radio-option">
-              <input type="radio" name="options_fair" value="not_sure">
-              <span class="radio-custom"></span>
-              <span>Not sure</span>
-            </label>
+          <fieldset class="choice-panel">
+            <legend>Are you an EVSC student? <span class="required">*</span></legend>
+            <div class="radio-row">
+              <label class="radio-option">
+                <input type="radio" name="evsc_student" value="yes" required>
+                <span class="radio-custom"></span>
+                <span>Yes, I am</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="evsc_student" value="no" required>
+                <span class="radio-custom"></span>
+                <span>No, I’m not</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div id="options-fair-field" class="field conditional-field" hidden>
+            <label>Did you see us at the Options Fair? <span class="required">*</span></label>
+            <div class="radio-row">
+              <label class="radio-option">
+                <input type="radio" name="options_fair" value="yes">
+                <span class="radio-custom"></span>
+                <span>Yes</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="options_fair" value="no">
+                <span class="radio-custom"></span>
+                <span>No</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="options_fair" value="not_sure">
+                <span class="radio-custom"></span>
+                <span>Not sure</span>
+              </label>
+            </div>
           </div>
-        </div>
+        </section>
 
         <div class="form-footer">
           <p><span class="required">*</span> Required fields</p>
@@ -219,7 +231,6 @@
         </div>
       </form>
     </section>
-    <footer class="page-footer">Curiosity starts somewhere. <span>Start here.</span></footer>
   </main>
 
   <script>
@@ -228,7 +239,8 @@
     const optionsFairInputs = [...document.querySelectorAll('input[name="options_fair"]')];
     const formMessage = document.getElementById('form-message');
     const submitButton = form.querySelector('button[type="submit"]');
-    const googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycbwToW542k8Oo9J6jMadKbF2T8ipSiCAi8v5mZT7ndVPAQZIOLcLitl8KNH2co2GgEL20w/exec';
+    const privacyNote = form.querySelector('.privacy-note');
+    const googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycbyyPRxPZwp46265XbdS-V0ND6jwR6G9s24jXCnYWfOxH8zINSwjen-m733zhERFNGpn6w/exec';
 
     function updateOptionsFairQuestion() {
       const selected = document.querySelector('input[name="evsc_student"]:checked');
@@ -248,16 +260,15 @@
       event.preventDefault();
       if (!form.reportValidity()) return;
 
+      privacyNote.hidden = true;
       formMessage.hidden = false;
       if (!googleAppsScriptUrl) {
         formMessage.textContent = 'This form is not connected yet. Set the Google Apps Script web app URL after deployment.';
-        formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         return;
       }
 
       submitButton.disabled = true;
       formMessage.textContent = 'Submitting your entry...';
-      formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
       try {
         await fetch(googleAppsScriptUrl, {
@@ -265,7 +276,7 @@
           mode: 'no-cors',
           body: new URLSearchParams(new FormData(form))
         });
-        formMessage.textContent = 'Thanks! Your entry was sent.';
+        formMessage.textContent = 'Form submitted, you will receive an email soon regarding your T-Shirt.';
       } catch (error) {
         submitButton.disabled = false;
         formMessage.textContent = 'We could not send your entry. Please check your connection and try again.';

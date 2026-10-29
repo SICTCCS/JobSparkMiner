@@ -3,6 +3,7 @@
 ## Phase 1
 The title/header should be: "Enter to win a SICTC t-shirt - and other fun things!"
 We need the form to include fields for the following information:
+  - Full name
   - Email address
   - School
   - Shirt size
@@ -22,7 +23,7 @@ The form uses `google-apps-script.gs` as a small web-app receiver. To connect it
 6. In `index.html`, set `googleAppsScriptUrl` to that URL.
 7. Submit a test entry and verify it appears in the first sheet tab (the tab with ID `0`) of the linked spreadsheet.
 
-The web app writes a timestamp, email, school, shirt size, three program choices, EVSC status, and Options Fair response. It creates and formats a header row if the target sheet is empty. The public web-app URL accepts unauthenticated form submissions, so keep it out of unrelated pages and monitor the sheet for spam.
+The web app writes a timestamp, email, school, shirt size, three program choices, EVSC status, Options Fair response, and full name. It creates and formats a header row if the target sheet is empty, and appends the Full Name column when upgrading a sheet with the previous headers. The public web-app URL accepts unauthenticated form submissions, so keep it out of unrelated pages and monitor the sheet for spam.
 
 ## Phase 2
  - Website runs through Flask Server
