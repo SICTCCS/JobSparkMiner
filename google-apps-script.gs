@@ -13,27 +13,22 @@ const HEADERS = [
   'Full Name'
 ];
 const PROGRAMS = new Set([
-  'Computer Science',
+  'Automotive',
+  'Diesel',
+  'Cosmotology',
+  'Welding',
+  'Advance Manufacturing',
+  'Precision Machine',
+  'Comp Sci',
   'Cybersecurity',
-  'Architecture Engineering & Design Technology',
-  'Media Communications & Broadcasting',
-  'Graphic Communications/Digital Media',
-  'Building Construction Technology',
-  'Electrical Technology',
-  'HVAC-R and Energy Systems',
-  'Advanced Manufacturing Technology',
-  'Precision Machine Metalworking Technology',
-  'Welding Technology',
-  'Criminal Justice',
-  'Culinary Arts',
-  'Health Sciences: Exercise Science',
-  'Health Sciences: Pre-Professional',
-  'Veterinary Sciences',
-  'Cosmetology & Barbering',
-  'Automotive Collision Repair Technology',
-  'Automotive Service Technology',
-  'Diesel Service Technology'
+  'Engineering',
+  'Health Careers',
+  'Construction',
+  'Electrical',
+  'Graphic Media',
+  'Media Broadcasting'
 ]);
+const SHIRT_SIZES = new Set(['S', 'M', 'L', 'XL']);
 
 function initializeSheet() {
   const sheet = getTargetSheet();
@@ -91,14 +86,24 @@ function validateSubmission(submission) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(submission.email)) {
     throw new Error('Invalid email address.');
   }
-  if (![submission.program_1, submission.program_2, submission.program_3].every((program) => PROGRAMS.has(program))) {
+  if (!SHIRT_SIZES.has(submission.shirt_size)) {
+    throw new Error('Invalid shirt size.');
+  }
+  const selectedPrograms = [submission.program_1, submission.program_2, submission.program_3];
+  if (!selectedPrograms.every((program) => PROGRAMS.has(program))) {
     throw new Error('Invalid program choice.');
+  }
+  if (new Set(selectedPrograms).size !== selectedPrograms.length) {
+    throw new Error('Program choices must be unique.');
   }
   if (!['yes', 'no'].includes(submission.evsc_student)) {
     throw new Error('Invalid EVSC response.');
   }
   if (submission.evsc_student === 'yes' && !['yes', 'no', 'not_sure'].includes(submission.options_fair)) {
     throw new Error('Invalid Options Fair response.');
+  }
+  if (submission.evsc_student === 'no' && submission.options_fair) {
+    throw new Error('Options Fair response is only valid for EVSC students.');
   }
 }
 
@@ -119,7 +124,21 @@ function prepareSheet(sheet) {
     const matchesPreviousHeaders = HEADERS.slice(0, -1)
       .every((header, index) => existingHeaders[index] === header);
     const newHeaderIsEmpty = !existingHeaders[HEADERS.length - 1];
-    if (matchesPreviousHeaders && newHeaderIsEmpty) {
+    const headersWithoutFullName = existingHeaders.filter((header) => header && header !== 'Full Name');
+    const expectedHeadersWithoutFullName = HEADERS.slice(0, -1);
+    const fullNameIsOutOfPlace = existingHeaders.indexOf('Full Name') !== -1
+      && existingHeaders.indexOf('Full Name') !== HEADERS.length - 1
+      && headersWithoutFullName.length === expectedHeadersWithoutFullName.length
+      && expectedHeadersWithoutFullName.every((header, index) => headersWithoutFullName[index] === header);
+
+    if (fullNameIsOutOfPlace) {
+      const rows = sheet.getRange(1, 1, lastRow, HEADERS.length).getValues();
+      const reorderedRows = rows.map((row) => HEADERS.map((header) => {
+        const columnIndex = existingHeaders.indexOf(header);
+        return columnIndex === -1 ? '' : row[columnIndex];
+      }));
+      sheet.getRange(1, 1, lastRow, HEADERS.length).setValues(reorderedRows);
+    } else if (matchesPreviousHeaders && newHeaderIsEmpty) {
       sheet.getRange(1, HEADERS.length).setValue(HEADERS[HEADERS.length - 1]);
     } else if (!matchesCurrentHeaders) {
       throw new Error('The target sheet already has different headers.');

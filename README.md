@@ -22,8 +22,11 @@ The form uses `google-apps-script.gs` as a small web-app receiver. To connect it
 5. Deploy and copy the web app URL ending in `/exec`.
 6. In `index.html`, set `googleAppsScriptUrl` to that URL.
 7. Submit a test entry and verify it appears in the first sheet tab (the tab with ID `0`) of the linked spreadsheet.
+8. When updating an existing Apps Script deployment, open **Deploy > Manage deployments**, edit the web app deployment, select **New version**, and deploy so the live endpoint uses the updated validation.
 
-The web app writes a timestamp, email, school, shirt size, three program choices, EVSC status, Options Fair response, and full name. It creates and formats a header row if the target sheet is empty, and appends the Full Name column when upgrading a sheet with the previous headers. The public web-app URL accepts unauthenticated form submissions, so keep it out of unrelated pages and monitor the sheet for spam.
+The web app writes a timestamp, email, school, shirt size, three program choices, EVSC status, Options Fair response, and full name. It creates and formats a header row if the target sheet is empty, appends the Full Name column when upgrading a sheet with the previous headers, and moves an existing Full Name column to the far right when the other headers match. The public web-app URL accepts unauthenticated form submissions, so keep it out of unrelated pages and monitor the sheet for spam.
+
+The current form accepts shirt sizes S, M, L, and XL and requires three distinct program choices from its 14 class options. The Options Fair answer is required only when the entrant answers Yes to the EVSC student question.
 
 ## Phase 2
  - Website runs through Flask Server

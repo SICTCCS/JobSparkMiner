@@ -52,28 +52,19 @@
 
             <div class="field">
               <label for="school">Current school <span class="required">*</span></label>
-              <input id="school" name="school" type="text" placeholder="Enter your school name" autocomplete="organization" required>
-            </div>
-
-            <div class="field">
-              <label for="shirt-size">T-shirt size <span class="required">*</span></label>
-              <div class="select-wrap">
-                <select id="shirt-size" name="shirt_size" required>
-                  <option value="" disabled selected>Select your size</option>
-                  <option value="Youth S">Youth Small</option>
-                  <option value="Youth M">Youth Medium</option>
-                  <option value="Youth L">Youth Large</option>
-                  <option value="Adult XS">Adult XS</option>
-                  <option value="Adult S">Adult Small</option>
-                  <option value="Adult M">Adult Medium</option>
-                  <option value="Adult L">Adult Large</option>
-                  <option value="Adult XL">Adult XL</option>
-                  <option value="Adult 2XL">Adult 2XL</option>
-                  <option value="Adult 3XL">Adult 3XL</option>
-                </select>
-              </div>
+              <input id="school" name="school" type="text" placeholder="Type your school name" autocomplete="organization" required>
             </div>
           </div>
+
+          <fieldset class="choice-panel">
+            <legend>T-shirt size <span class="required">*</span></legend>
+            <div class="radio-row">
+              <label class="radio-option"><input type="radio" name="shirt_size" value="S" required><span class="radio-custom"></span><span>S</span></label>
+              <label class="radio-option"><input type="radio" name="shirt_size" value="M"><span class="radio-custom"></span><span>M</span></label>
+              <label class="radio-option"><input type="radio" name="shirt_size" value="L"><span class="radio-custom"></span><span>L</span></label>
+              <label class="radio-option"><input type="radio" name="shirt_size" value="XL"><span class="radio-custom"></span><span>XL</span></label>
+            </div>
+          </fieldset>
         </section>
 
         <section class="form-section programs-section" aria-labelledby="programs-heading">
@@ -81,104 +72,41 @@
             <span class="section-number">02</span>
             <div>
               <h2 id="programs-heading">What interests you?</h2>
-              <p>Pick three SICTC programs you’d like to learn more about.</p>
+              <p>Choose exactly three SICTC programs you’d like to learn more about.</p>
             </div>
           </div>
 
-          <div class="program-grid">
-          <div class="field">
-            <label for="program-1">Program choice 1 <span class="required">*</span></label>
-            <div class="select-wrap">
-              <select id="program-1" name="program_1" required>
-                <option value="" disabled selected>Select a program</option>
-                <option>Computer Science</option>
-                <option>Cybersecurity</option>
-                <option>Architecture Engineering &amp; Design Technology</option>
-                <option>Media Communications &amp; Broadcasting</option>
-                <option>Graphic Communications/Digital Media</option>
-                <option>Building Construction Technology</option>
-                <option>Electrical Technology</option>
-                <option>HVAC-R and Energy Systems</option>
-                <option>Advanced Manufacturing Technology</option>
-                <option>Precision Machine Metalworking Technology</option>
-                <option>Welding Technology</option>
-                <option>Criminal Justice</option>
-                <option>Culinary Arts</option>
-                <option>Health Sciences: Exercise Science</option>
-                <option>Health Sciences: Pre-Professional</option>
-                <option>Veterinary Sciences</option>
-                <option>Cosmetology &amp; Barbering</option>
-                <option>Automotive Collision Repair Technology</option>
-                <option>Automotive Service Technology</option>
-                <option>Diesel Service Technology</option>
-              </select>
+          <fieldset class="program-picker" aria-describedby="program-count">
+            <legend>Select 3 programs <span class="required">*</span></legend>
+            <div class="program-options" id="program-options">
+              <label class="program-option"><input type="checkbox" value="Automotive"><span>🚘 Automotive</span></label>
+              <label class="program-option"><input type="checkbox" value="Diesel"><span>🚛 Diesel</span></label>
+              <label class="program-option"><input type="checkbox" value="Cosmotology"><span>💇 Cosmotology</span></label>
+              <label class="program-option"><input type="checkbox" value="Welding"><span>🔥 Welding</span></label>
+              <label class="program-option"><input type="checkbox" value="Advance Manufacturing"><span>⚙️ Advance Manufacturing</span></label>
+              <label class="program-option"><input type="checkbox" value="Precision Machine"><span>🔩 Precision Machine</span></label>
+              <label class="program-option"><input type="checkbox" value="Comp Sci"><span>💻 Comp Sci</span></label>
+              <label class="program-option"><input type="checkbox" value="Cybersecurity"><span>🔐 Cybersecurity</span></label>
+              <label class="program-option"><input type="checkbox" value="Engineering"><span>📐 Engineering</span></label>
+              <label class="program-option"><input type="checkbox" value="Health Careers"><span>🩺 Health Careers</span></label>
+              <label class="program-option"><input type="checkbox" value="Construction"><span>🏗️ Construction</span></label>
+              <label class="program-option"><input type="checkbox" value="Electrical"><span>⚡ Electrical</span></label>
+              <label class="program-option"><input type="checkbox" value="Graphic Media"><span>🎨 Graphic Media</span></label>
+              <label class="program-option"><input type="checkbox" value="Media Broadcasting"><span>🎥 Media Broadcasting</span></label>
             </div>
-          </div>
-          <div class="field">
-            <label for="program-2">Program choice 2 <span class="required">*</span></label>
-            <div class="select-wrap">
-              <select id="program-2" name="program_2" required>
-                <option value="" disabled selected>Select a program</option>
-                <option>Computer Science</option>
-                <option>Cybersecurity</option>
-                <option>Architecture Engineering &amp; Design Technology</option>
-                <option>Media Communications &amp; Broadcasting</option>
-                <option>Graphic Communications/Digital Media</option>
-                <option>Building Construction Technology</option>
-                <option>Electrical Technology</option>
-                <option>HVAC-R and Energy Systems</option>
-                <option>Advanced Manufacturing Technology</option>
-                <option>Precision Machine Metalworking Technology</option>
-                <option>Welding Technology</option>
-                <option>Criminal Justice</option>
-                <option>Culinary Arts</option>
-                <option>Health Sciences: Exercise Science</option>
-                <option>Health Sciences: Pre-Professional</option>
-                <option>Veterinary Sciences</option>
-                <option>Cosmetology &amp; Barbering</option>
-                <option>Automotive Collision Repair Technology</option>
-                <option>Automotive Service Technology</option>
-                <option>Diesel Service Technology</option>
-              </select>
-            </div>
-          </div>
-          <div class="field">
-            <label for="program-3">Program choice 3 <span class="required">*</span></label>
-            <div class="select-wrap">
-              <select id="program-3" name="program_3" required>
-                <option value="" disabled selected>Select a program</option>
-                <option>Computer Science</option>
-                <option>Cybersecurity</option>
-                <option>Architecture Engineering &amp; Design Technology</option>
-                <option>Media Communications &amp; Broadcasting</option>
-                <option>Graphic Communications/Digital Media</option>
-                <option>Building Construction Technology</option>
-                <option>Electrical Technology</option>
-                <option>HVAC-R and Energy Systems</option>
-                <option>Advanced Manufacturing Technology</option>
-                <option>Precision Machine Metalworking Technology</option>
-                <option>Welding Technology</option>
-                <option>Criminal Justice</option>
-                <option>Culinary Arts</option>
-                <option>Health Sciences: Exercise Science</option>
-                <option>Health Sciences: Pre-Professional</option>
-                <option>Veterinary Sciences</option>
-                <option>Cosmetology &amp; Barbering</option>
-                <option>Automotive Collision Repair Technology</option>
-                <option>Automotive Service Technology</option>
-                <option>Diesel Service Technology</option>
-              </select>
-            </div>
-          </div>
-          </div>
+            <p class="field-hint" id="program-count" aria-live="polite">0 of 3 selected</p>
+          </fieldset>
+          <input type="hidden" name="program_1" id="program-1">
+          <input type="hidden" name="program_2" id="program-2">
+          <input type="hidden" name="program_3" id="program-3">
         </section>
 
         <section class="form-section student-section" aria-labelledby="student-heading">
           <div class="section-heading">
             <span class="section-number">03</span>
             <div>
-              <h2 id="student-heading">One quick question</h2>
-              <p>This section only applies to EVSC students.</p>
+              <h2 id="student-heading">A couple quick questions</h2>
+              <p>Help us learn a little more about you.</p>
             </div>
           </div>
 
@@ -188,18 +116,18 @@
               <label class="radio-option">
                 <input type="radio" name="evsc_student" value="yes" required>
                 <span class="radio-custom"></span>
-                <span>Yes, I am</span>
+                <span>Yes</span>
               </label>
               <label class="radio-option">
                 <input type="radio" name="evsc_student" value="no" required>
                 <span class="radio-custom"></span>
-                <span>No, I’m not</span>
+                <span>No</span>
               </label>
             </div>
           </fieldset>
 
-          <div id="options-fair-field" class="field conditional-field" hidden>
-            <label>Did you see us at the Options Fair? <span class="required">*</span></label>
+          <fieldset id="options-fair-field" class="choice-panel conditional-field" hidden>
+            <legend>Did you see us at the Options Fair? <span class="required">*</span></legend>
             <div class="radio-row">
               <label class="radio-option">
                 <input type="radio" name="options_fair" value="yes">
@@ -217,7 +145,7 @@
                 <span>Not sure</span>
               </label>
             </div>
-          </div>
+          </fieldset>
         </section>
 
         <div class="form-footer">
@@ -237,27 +165,48 @@
     const form = document.getElementById('giveaway-form');
     const optionsFairField = document.getElementById('options-fair-field');
     const optionsFairInputs = [...document.querySelectorAll('input[name="options_fair"]')];
+    const evscStudentInputs = [...document.querySelectorAll('input[name="evsc_student"]')];
+    const programOptions = [...document.querySelectorAll('#program-options input[type="checkbox"]')];
+    const programCount = document.getElementById('program-count');
+    const programInputs = [1, 2, 3].map((number) => document.getElementById(`program-${number}`));
     const formMessage = document.getElementById('form-message');
     const submitButton = form.querySelector('button[type="submit"]');
     const privacyNote = form.querySelector('.privacy-note');
-    const googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycbyyPRxPZwp46265XbdS-V0ND6jwR6G9s24jXCnYWfOxH8zINSwjen-m733zhERFNGpn6w/exec';
-
+    const googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycbwjAxIVR1YkuGg3ndz47h8uXieunc9lsRlerNPayn4u4iprEZOp2X1iLcO1EishqUknzg/exec';
     function updateOptionsFairQuestion() {
-      const selected = document.querySelector('input[name="evsc_student"]:checked');
-      const showQuestion = selected && selected.value === 'yes';
-      optionsFairField.hidden = !showQuestion;
+      const isEvscStudent = document.querySelector('input[name="evsc_student"]:checked')?.value === 'yes';
+      optionsFairField.hidden = !isEvscStudent;
       optionsFairInputs.forEach((input) => {
-        input.required = Boolean(showQuestion);
-        if (!showQuestion) input.checked = false;
+        input.required = isEvscStudent;
+        if (!isEvscStudent) input.checked = false;
       });
     }
 
-    document.querySelectorAll('input[name="evsc_student"]').forEach((input) => {
-      input.addEventListener('change', updateOptionsFairQuestion);
-    });
+    evscStudentInputs.forEach((input) => input.addEventListener('change', updateOptionsFairQuestion));
+    updateOptionsFairQuestion();
+
+    function updateProgramChoices(event) {
+      if (event?.target.checked && programOptions.filter((input) => input.checked).length > 3) {
+        event.target.checked = false;
+      }
+      const selectedPrograms = programOptions.filter((input) => input.checked).map((input) => input.value);
+
+      programInputs.forEach((input, index) => {
+        input.value = selectedPrograms[index] || '';
+      });
+      programOptions.forEach((input) => {
+        input.disabled = selectedPrograms.length === 3 && !input.checked;
+      });
+      programCount.textContent = `${selectedPrograms.length} of 3 selected`;
+      programOptions[0].setCustomValidity(selectedPrograms.length === 3 ? '' : 'Select exactly 3 programs.');
+    }
+
+    programOptions.forEach((input) => input.addEventListener('change', updateProgramChoices));
+    updateProgramChoices();
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
+      updateProgramChoices();
       if (!form.reportValidity()) return;
 
       privacyNote.hidden = true;

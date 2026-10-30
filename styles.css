@@ -312,6 +312,77 @@ select option { background: #111729; color: var(--text); }
   font-size: 12px;
 }
 
+.program-picker {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.program-picker legend {
+  margin-bottom: 9px;
+  color: #e7ebf8;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.program-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 8px;
+}
+
+.program-option {
+  display: flex;
+  min-width: 0;
+  min-height: 48px;
+  align-items: flex-start;
+  gap: 9px;
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1.4;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+.program-option:hover {
+  border-color: rgba(92, 141, 27, 0.55);
+  background: rgba(92, 141, 27, 0.08);
+}
+
+.program-option input {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  margin: 1px 0 0;
+  accent-color: var(--brand-blue);
+}
+
+.program-option input:focus-visible {
+  outline: 3px solid rgba(26, 82, 144, 0.38);
+  outline-offset: 3px;
+}
+
+.program-option input:checked + span {
+  color: var(--brand-blue);
+  font-weight: 700;
+}
+
+.program-option input:disabled,
+.program-option input:disabled + span {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.program-picker .field-hint {
+  margin-top: 8px;
+}
+
 .program-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -775,7 +846,7 @@ select option { background: #fff; color: var(--text); }
   .privacy-note { font-size: 8px; }
 }
 
-@media (max-height: 680px) {
+@media (min-width: 761px) and (max-height: 800px) {
   .page-shell { padding-top: 8px; padding-bottom: 8px; }
   .brand-row { margin-bottom: 8px; }
   h1 { margin: 8px 0; font-size: clamp(1.5rem, 5vh, 2.5rem); }
@@ -868,4 +939,87 @@ select option { background: #fff; color: var(--text); }
 
 @media (min-width: 761px) and (max-width: 1000px) {
   .program-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 761px) and (max-height: 800px) {
+  .page-shell {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+    gap: 0;
+    padding: 8px;
+  }
+  .intro-panel { display: none; }
+  .form-card { overflow: hidden; padding: 10px 14px; }
+  .form-layout {
+    height: 100%;
+    min-height: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: minmax(0, 1fr) auto;
+    align-content: stretch;
+    gap: 8px 14px;
+  }
+  .about-section {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .programs-section {
+    grid-column: 2;
+    grid-row: 1;
+    min-height: 0;
+  }
+  .student-section {
+    grid-column: 1;
+    grid-row: 2;
+    gap: 5px;
+  }
+  .form-layout > .form-footer {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: center;
+  }
+  .section-heading { gap: 7px; margin-bottom: 5px; }
+  .section-heading p { display: none; }
+  .section-heading h2 { font-size: 15px; }
+  .section-number { width: 24px; height: 24px; font-size: 10px; }
+  .basic-fields { gap: 5px 8px; }
+  .field > label, .choice-panel legend, .program-picker legend { font-size: 10px; }
+  input[type="text"], input[type="email"], select {
+    min-height: 32px;
+    padding: 5px 7px;
+    font-size: 10px;
+  }
+  .choice-panel { padding: 6px; }
+  .choice-panel legend { margin-bottom: 4px; }
+  .radio-row { gap: 4px; }
+  .radio-option { min-height: 26px; gap: 4px; padding: 4px 6px; font-size: 9px; }
+  .radio-custom { width: 12px; height: 12px; }
+  .program-picker { min-height: 0; }
+  .program-picker legend { margin-bottom: 5px; }
+  .program-options { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; }
+  .program-option {
+    min-height: 32px;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 6px;
+    border-radius: 7px;
+    font-size: 9px;
+    line-height: 1.2;
+  }
+  .program-option input { width: 13px; height: 13px; }
+  .program-picker .field-hint { margin-top: 5px; font-size: 10px; }
+  .form-footer { padding-top: 6px; }
+  .form-footer > p:first-child { margin-bottom: 4px; font-size: 9px; }
+  .submit-button { min-height: 34px; padding: 4px 8px; font-size: 11px; }
+  .button-arrow { width: 20px; height: 20px; }
+  .privacy-note { margin-top: 4px; font-size: 8px; line-height: 1.25; }
+}
+
+@media (max-width: 760px) and (min-height: 681px) and (max-height: 900px) {
+  .page-shell { grid-template-rows: minmax(0, 1fr); }
+  .intro-panel { display: none; }
+  .form-card { overflow: hidden; padding: 8px; }
+  .form-layout { gap: 4px; }
+  .section-heading p { display: none; }
+  .program-options { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; }
+  .program-option { min-height: 36px; padding: 6px 7px; font-size: 10px; }
 }
