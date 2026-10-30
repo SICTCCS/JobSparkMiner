@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SICTC Drawing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+<style>
+  /* ===== COLOR + TYPE TOKENS: change these to re-theme ===== */
+  :root {
+    /* SICTC logo colors, sampled directly from the logo file */
+    --blue: #335879;         /* SICTC blue  (Pantone 2955U) */
+    --green: #707f43;        /* SICTC green (Pantone 7496U) */
+    --green-deep: #5a6735;   /* button hover */
+    --green-tint: #c6d79b;   /* light green for text on the blue panel */
+
+    --ink: var(--blue);      /* left panel, headings, selected chips */
+    --ink-soft: #3d4f66;     /* secondary text on light */
+    --text: #1a2433;         /* body text */
+    --spark: var(--green);   /* accent (buttons, focus, check marks) */
+    --spark-deep: var(--green-deep);
+    --paper: #f6f8fb;        /* form background */
+    --field: #ffffff;        /* input background */
+    --line: #cfd7e2;         /* borders */
+    --ok: #3f7a12;           /* success toast */
+    --bad: #c8453b;          /* error toast */
+
+    /* SICTC fonts. The brand fonts are licensed, so they load from your own
+       /static/fonts files if you add them (see @font-face below); otherwise
+       the stand-ins after them are used. */
+    --franklin: "Franklin Gothic Medium Cond", "Barlow Condensed", "Arial Narrow", sans-serif;
+    --swiss: "Swis721 Cn BT", "Roboto Condensed", "Arial Narrow", sans-serif;
+    --display: var(--swiss);
+    --body: Arial, "Helvetica Neue", sans-serif;
+  }
+
+  /* OPTIONAL: uncomment and point at your licensed font files (put them in static/fonts/)
+  @font-face { font-family: "Franklin Gothic Medium Cond"; font-weight: 400;
+    src: url("/static/fonts/FranklinGothicMediumCond.woff2") format("woff2"); }
+  @font-face { font-family: "Swis721 Cn BT"; font-weight: 700;
+    src: url("/static/fonts/Swiss721CnBT-Bold.woff2") format("woff2"); }
+  */
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    font-family: var(--body);
+    color: var(--text);
+    background: var(--paper);
+    display: grid;
+    grid-template-columns: minmax(340px, 38%) 1fr;
+  }
+
+  /* ===== LEFT PANEL ===== */
+  .brand {
+    background: var(--ink);
+    color: #fff;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  .brand h1 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(3.5rem, 6.5vw, 6rem);
+    line-height: .92;
+    letter-spacing: -.03em;
+    margin: 0 0 24px;
+  }
+    .brand p { font-size: 1.15rem; line-height: 1.5; max-width: 30ch; margin: 0; color: #e3ecf7; }
+  .brand .org, .brand .event { position: relative; z-index: 1; }  /* keep content above the spark */
+  .brand .org { background: #fff; padding: 36px 48px; }             /* white band so the blue logo reads */
+  .brand .org img { display: block; width: min(100%, 360px); height: auto; }
+  .brand .event { padding: 0 48px 56px; }
+
+  /* the SICTC logo mark, recolored for the blue panel */
+  .brand .mark {
+    flex: 1;
+    min-height: 140px;
+    margin: 28px 48px;
+    background: url("{{ url_for('static', filename='sictc-mark.png') }}") right center / contain no-repeat;
+    opacity: .9;
+    transform-origin: right center;
+    animation: drift 6s ease-in-out infinite;
+  }
+  @keyframes drift { 50% { transform: scale(1.04); } }
+
+  /* ===== FORM ===== */
+  main { padding: 40px 64px; display: flex; align-items: center; overflow-y: auto; }
+  form { width: 100%; max-width: 720px; margin: 0 auto; }
+  form h2 { font-family: var(--display); font-size: 1.9rem; margin: 0 0 4px; letter-spacing: -.01em; }
+  .sub { margin: 0 0 24px; color: var(--ink-soft); }
+
+  .row { display: grid; gap: 16px; margin-bottom: 18px; }
+  .row.two { grid-template-columns: 1fr 1fr; }
+  .row.three { grid-template-columns: repeat(3, 1fr); }
+
+  label, legend { display: block; font-weight: 700; font-size: .95rem; margin-bottom: 6px; padding: 0; }
+  fieldset { border: 0; margin: 0 0 18px; padding: 0; min-width: 0; }
+  .hint { font-weight: 400; color: var(--ink-soft); }
+
+  input[type="email"], input[type="text"], select {
+    width: 100%;
+    font: inherit;
+    padding: 11px 12px;
+    background: var(--field);
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    color: var(--ink);
+  }
+  input:focus-visible, select:focus-visible, .pill input:focus-visible + span {
+    outline: 3px solid var(--spark);
+    outline-offset: 2px;
+  }
+
+  /* pill radios (shirt size, yes/no) */
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill input { position: absolute; opacity: 0; pointer-events: none; }
+  .pill span {
+    display: inline-block;
+    min-width: 52px;
+    text-align: center;
+    padding: 9px 14px;
+    background: var(--field);
+    border: 1.5px solid var(--line);
+    border-radius: 999px;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+  }
+  .pill input:checked + span { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .pill { margin: 0; font-weight: 400; }
+
+  /* program chips (checkboxes) */
+  .chips { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; max-height: 210px; overflow-y: auto; padding: 2px; }
+  .chip { margin: 0; font-weight: 500; }
+  .chip input { position: absolute; opacity: 0; pointer-events: none; }
+  .chip span {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px;
+    background: var(--field);
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+    transition: background .15s, border-color .15s, transform .15s;
+  }
+  .chip span::before {            /* the little check circle */
+    content: "";
+    width: 18px; height: 18px; flex: none;
+    border: 2px solid var(--line);
+    border-radius: 50%;
+    transition: background .15s, border-color .15s;
+  }
+  .chip:hover input:not(:disabled) + span { border-color: var(--spark); }
+  .chip input:checked + span { background: var(--ink); border-color: var(--ink); color: #fff; transform: scale(1.02); }
+  .chip input:checked + span::before {
+    background: var(--spark) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l3 3 5-6' fill='none' stroke='%23ffffff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 14px no-repeat;
+    border-color: var(--spark);
+  }
+  .chip input:disabled + span { opacity: .4; cursor: not-allowed; }
+  .chip input:focus-visible + span { outline: 3px solid var(--spark); outline-offset: 2px; }
+  #program-count.full { color: var(--ok); font-weight: 700; }
+
+  /* conditional fields */
+  .conditional { display: none; }
+  .conditional.show { display: block; }
+
+  button[type="submit"] {
+    font: inherit;
+    font-weight: 700;
+    font-size: 1.2rem;
+    background: var(--spark);
+    color: #fff;
+    border: 0;
+    border-radius: 10px;
+    padding: 14px 32px;
+    cursor: pointer;
+  }
+  button[type="submit"]:hover { background: var(--spark-deep); }
+  button[type="submit"]:disabled { opacity: .6; cursor: wait; }
+  .fine { font-size: .85rem; color: var(--ink-soft); margin: 14px 0 0; }
+
+  /* ===== TOAST ===== */
+  .toast {
+    position: fixed;
+    top: 24px; right: 24px;
+    max-width: 360px;
+    padding: 16px 20px;
+    background: var(--ok);
+    color: #fff;
+    font-weight: 700;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.2);
+    transform: translateY(-140%);
+    opacity: 0;
+    transition: transform .35s ease, opacity .35s ease;
+    z-index: 10;
+  }
+  .toast.error { background: var(--bad); }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* smaller screens */
+  @media (max-width: 900px) {
+    body { grid-template-columns: 1fr; height: auto; }
+    .brand { gap: 24px; }
+    .brand .org { padding: 24px; }
+    .brand .event { padding: 0 24px 32px; }
+    .brand .mark { display: none; }
+    main { padding: 28px 24px; }
+    .row.two, .row.three { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .brand .mark { animation: none; }
+    .toast { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+  <aside class="brand">
+    <header class="org">
+      <img src="{{ url_for('static', filename='sictc-logo.png') }}" alt="Southern Indiana Career &amp; Technical Center">
+    </header>
+    <div class="mark" aria-hidden="true"></div>
+    <div class="event">
+      <h1>SICTC</h1>
+      <p>Tell us what lights you up. Enter for a chance to win a Job Spark t-shirt.</p>
+    </div>
+  </aside>
+
+  <main>
+    <form id="entry-form" action="/submit" method="post" novalidate>
+      <h2>Enter the drawing</h2>
+      <p class="sub">All fields are required. The winner's shirt will be sent to their school.</p>
+
+      <div class="row two">
+        <div>
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="email" autocomplete="email" required>
+        </div>
+        <div>
+          <label for="school">School</label>
+          <select id="school" name="school" required>
+            <option value="" selected disabled>Choose your school</option>
+            <!-- EDIT: replace with your real school list. data-evsc marks EVSC schools. -->
+            <optgroup label="EVSC">
+              <option data-evsc="true">Bosse High School</option>
+              <option data-evsc="true">Central High School</option>
+              <option data-evsc="true">Harrison High School</option>
+              <option data-evsc="true">Memorial High School</option>
+              <option data-evsc="true">North High School</option>
+              <option data-evsc="true">Reitz High School</option>
+              <option data-evsc="true">Signature School</option>
+            </optgroup>
+            <optgroup label="Other schools">
+              <option>Mater Dei High School</option>
+              <option>Other</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+
+      <div class="row conditional" id="other-school-wrap">
+        <div>
+          <label for="other_school">Your school's name</label>
+          <input type="text" id="other_school" name="other_school">
+        </div>
+      </div>
+
+      <fieldset>
+        <legend>Shirt size</legend>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="shirt_size" value="XS" required><span>XS</span></label>
+          <label class="pill"><input type="radio" name="shirt_size" value="S"><span>S</span></label>
+          <label class="pill"><input type="radio" name="shirt_size" value="M"><span>M</span></label>
+          <label class="pill"><input type="radio" name="shirt_size" value="L"><span>L</span></label>
+          <label class="pill"><input type="radio" name="shirt_size" value="XL"><span>XL</span></label>
+          <label class="pill"><input type="radio" name="shirt_size" value="2XL"><span>2XL</span></label>
+          <label class="pill"><input type="radio" name="shirt_size" value="3XL"><span>3XL</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Pick 3 programs that sound interesting <span class="hint" id="program-count">0 of 3 chosen</span></legend>
+        <!-- Chips are filled in by the PROGRAMS list in the script below. -->
+        <div class="chips" id="programs"></div>
+      </fieldset>
+
+      <fieldset class="conditional" id="fair-wrap">
+        <legend>Did you see us at the options fair?</legend>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="saw_at_options_fair" value="Yes"><span>Yes</span></label>
+          <label class="pill"><input type="radio" name="saw_at_options_fair" value="No"><span>No</span></label>
+        </div>
+      </fieldset>
+
+      <button type="submit" id="submit-btn">Enter the drawing</button>
+      <p class="fine">We'll email you a confirmation.</p>
+    </form>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  // ===== PROGRAM LIST: replace with the real SICTC programs =====
+  const PROGRAMS = [
+    "Automotive Technology",
+    "Construction Trades 🔨",
+    "Culinary Arts 🍳",
+    "Health Careers",
+    "Welding 👨‍🏭",
+    "Cybersecurity 🔐",
+    "Computer Science 💻",
+    "Cybersecurity",
+    "Auto Collision Repair",
+    "Health Sci Exercise",
+    "Radio"
+  ];
+
+  const form = document.getElementById("entry-form");
+  const programBox = document.getElementById("programs");
+  const programCount = document.getElementById("program-count");
+  const school = document.getElementById("school");
+  const fairWrap = document.getElementById("fair-wrap");
+  const otherWrap = document.getElementById("other-school-wrap");
+  const otherInput = document.getElementById("other_school");
+  const toast = document.getElementById("toast");
+  const btn = document.getElementById("submit-btn");
+
+  // build one checkbox chip per program
+  PROGRAMS.forEach(p => {
+    const label = document.createElement("label");
+    label.className = "chip";
+    const input = document.createElement("input");
+    input.type = "checkbox";
+    input.name = "programs";
+    input.value = p;
+    const span = document.createElement("span");
+    span.textContent = p;
+    label.append(input, span);
+    programBox.append(label);
+  });
+  const boxes = [...programBox.querySelectorAll("input")];
+
+  // limit to 3: once three are checked, the rest gray out until one is unchecked
+  function syncPrograms() {
+    const n = boxes.filter(b => b.checked).length;
+    boxes.forEach(b => b.disabled = n >= 3 && !b.checked);
+    programCount.textContent = n + " of 3 chosen";
+    programCount.classList.toggle("full", n === 3);
+  }
+  boxes.forEach(b => b.addEventListener("change", syncPrograms));
+
+  // show the options-fair question only for EVSC students; ask for school name if "Other"
+  function syncSchool() {
+    const opt = school.selectedOptions[0];
+    const isEvsc = opt && opt.dataset.evsc === "true";
+    fairWrap.classList.toggle("show", isEvsc);
+    form.querySelectorAll('input[name="saw_at_options_fair"]').forEach(r => {
+      r.required = isEvsc;               // required only when the question is showing
+      if (!isEvsc) r.checked = false;
+    });
+    const isOther = school.value === "Other";
+    otherWrap.classList.toggle("show", isOther);
+    otherInput.required = isOther;
+  }
+  school.addEventListener("change", syncSchool);
+
+  function showToast(msg, isError = false) {
+    toast.textContent = msg;
+    toast.classList.toggle("error", isError);
+    toast.classList.add("show");
+    clearTimeout(showToast.t);
+    showToast.t = setTimeout(() => toast.classList.remove("show"), 4500); // fades away on its own
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!form.reportValidity()) return;
+    if (boxes.filter(b => b.checked).length !== 3) {
+      showToast("Please pick exactly 3 programs.", true);
+      return;
+    }
+
+    btn.disabled = true;
+    try {
+      const res = await fetch(form.action, { method: "POST", body: new FormData(form) });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Server returned " + res.status);
+      }
+
+      // TODO (confirmation email): handled server-side in the Flask /submit route.
+      // The route should save the entry, then send the email to the address in `email`.
+
+      form.reset();   // clear the form
+      syncSchool();
+      syncPrograms();
+      showToast("You're entered! Check your email for a confirmation.");
+    } catch (err) {
+      showToast(err.message.startsWith("Server returned") ? "Something went wrong. Please try again." : err.message, true);
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
