@@ -155,11 +155,12 @@
             <span class="button-arrow" aria-hidden="true">↗</span>
           </button>
           <p class="privacy-note">Your information should only be used for this giveaway and related SICTC follow-up.</p>
-          <div id="form-message" class="form-message" role="status" aria-live="polite" hidden></div>
         </div>
       </form>
     </section>
   </main>
+
+  <div id="form-alert" class="form-alert" role="status" aria-live="polite" hidden></div>
 
   <script>
     const form = document.getElementById('giveaway-form');
@@ -169,10 +170,22 @@
     const programOptions = [...document.querySelectorAll('#program-options input[type="checkbox"]')];
     const programCount = document.getElementById('program-count');
     const programInputs = [1, 2, 3].map((number) => document.getElementById(`program-${number}`));
-    const formMessage = document.getElementById('form-message');
+    const formAlert = document.getElementById('form-alert');
     const submitButton = form.querySelector('button[type="submit"]');
     const privacyNote = form.querySelector('.privacy-note');
     const googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycbwjAxIVR1YkuGg3ndz47h8uXieunc9lsRlerNPayn4u4iprEZOp2X1iLcO1EishqUknzg/exec';
+    let alertTimeout;
+
+    function showFormAlert(message, isError = false) {
+      clearTimeout(alertTimeout);
+      formAlert.textContent = message;
+      formAlert.classList.toggle('error', isError);
+      formAlert.hidden = false;
+      alertTimeout = setTimeout(() => {
+        formAlert.hidden = true;
+      }, 5000);
+    }
+
     function updateOptionsFairQuestion() {
       const isEvscStudent = document.querySelector('input[name="evsc_student"]:checked')?.value === 'yes';
       optionsFairField.hidden = !isEvscStudent;
@@ -209,15 +222,12 @@
       updateProgramChoices();
       if (!form.reportValidity()) return;
 
-      privacyNote.hidden = true;
-      formMessage.hidden = false;
       if (!googleAppsScriptUrl) {
-        formMessage.textContent = 'This form is not connected yet. Set the Google Apps Script web app URL after deployment.';
+        showFormAlert('This form is not connected yet. Set the Google Apps Script web app URL after deployment.', true);
         return;
       }
 
       submitButton.disabled = true;
-      formMessage.textContent = 'Submitting your entry...';
 
       try {
         await fetch(googleAppsScriptUrl, {
@@ -225,10 +235,16 @@
           mode: 'no-cors',
           body: new URLSearchParams(new FormData(form))
         });
-        formMessage.textContent = 'Form submitted, you will receive an email soon regarding your T-Shirt.';
+        form.reset();
+        updateOptionsFairQuestion();
+        updateProgramChoices();
+        privacyNote.hidden = false;
+        showFormAlert('Form submitted, you will receive an email soon regarding your T-Shirt.');
       } catch (error) {
+        privacyNote.hidden = false;
+        showFormAlert('We could not send your entry. Please check your connection and try again.', true);
+      } finally {
         submitButton.disabled = false;
-        formMessage.textContent = 'We could not send your entry. Please check your connection and try again.';
       }
     });
   </script>
