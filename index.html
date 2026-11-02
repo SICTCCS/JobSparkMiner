@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f4f7f5">
+  <meta name="theme-color" content="#f3f6f2">
   <title>SICTC T-Shirt Giveaway</title>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -14,57 +14,59 @@
 
     <section class="intro-panel" aria-labelledby="page-title">
       <div class="brand-row">
-        <img class="brand-logo" src="assets/images/sictc-logo.png" alt="Southern Indiana Career &amp; Technical Center">
-        <div class="brand-words">
-          <p class="brand-caption">Explore what you could create.</p>
-        </div>
+        <img class="brand-logo" src="assets/images/sictc-logo.png" alt="SICTC">
+        <p class="eyebrow">
+          <span>Southern Indiana</span>
+          <span>Career &amp; Technical Center</span>
+        </p>
       </div>
 
       <div class="intro">
-        <div class="pill"><span class="pill-dot"></span> GIVEAWAY + PROGRAM EXPLORATION</div>
-        <h1 id="page-title">Enter to win a SICTC t-shirt <span>— and other fun things!</span></h1>
-        <p class="intro-copy">Tell us a little about yourself and which programs caught your attention. Fill out the form below to enter.</p>
+        <span class="pill"><span class="pill-dot" aria-hidden="true"></span> ENTER TO WIN</span>
+        <h1 id="page-title">SICTC T-Shirt <span>Giveaway</span></h1>
+        <p class="intro-copy">Explore what you could create. Enter to win a SICTC t-shirt!</p>
       </div>
-      <footer class="page-footer">Curiosity starts somewhere. <span>Start here.</span></footer>
+
+      <footer class="page-footer">Discover what you can create at <span>SICTC</span>.</footer>
     </section>
 
     <section class="form-card" aria-label="Giveaway entry form">
-      <form id="giveaway-form" class="form-layout" action="#" method="post">
+      <form action="/submit" method="POST" class="form-layout">
         <section class="form-section about-section" aria-labelledby="about-heading">
           <div class="section-heading">
             <span class="section-number">01</span>
             <div>
               <h2 id="about-heading">About you</h2>
-              <p>Just the basics so we know how to reach you.</p>
+              <p>Tell us a little about yourself.</p>
             </div>
           </div>
 
           <div class="basic-fields">
             <div class="field">
               <label for="full-name">Full name <span class="required">*</span></label>
-              <input id="full-name" name="full_name" type="text" placeholder="Your full name" autocomplete="name" required>
+              <input id="full-name" type="text" name="full_name" autocomplete="name" placeholder="Your full name" required>
             </div>
-
             <div class="field">
               <label for="email">Email address <span class="required">*</span></label>
-              <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+              <input id="email" type="email" name="email" autocomplete="email" placeholder="name@example.com" required>
             </div>
-
             <div class="field">
               <label for="school">Current school <span class="required">*</span></label>
-              <input id="school" name="school" type="text" placeholder="Type your school name" autocomplete="organization" required>
+              <input id="school" type="text" name="school" autocomplete="organization" placeholder="Your school" required>
+            </div>
+            <div class="field">
+              <label for="t-shirt-size">T-shirt size <span class="required">*</span></label>
+              <div class="select-wrap">
+                <select id="t-shirt-size" name="t_shirt_size" required>
+                  <option value="">-- Select Size --</option>
+                  <option value="S">S</option>
+                  <option value="M">M</option>
+                  <option value="L">L</option>
+                  <option value="XL">XL</option>
+                </select>
+              </div>
             </div>
           </div>
-
-          <fieldset class="choice-panel">
-            <legend>T-shirt size <span class="required">*</span></legend>
-            <div class="radio-row">
-              <label class="radio-option"><input type="radio" name="shirt_size" value="S" required><span class="radio-custom"></span><span>S</span></label>
-              <label class="radio-option"><input type="radio" name="shirt_size" value="M"><span class="radio-custom"></span><span>M</span></label>
-              <label class="radio-option"><input type="radio" name="shirt_size" value="L"><span class="radio-custom"></span><span>L</span></label>
-              <label class="radio-option"><input type="radio" name="shirt_size" value="XL"><span class="radio-custom"></span><span>XL</span></label>
-            </div>
-          </fieldset>
         </section>
 
         <section class="form-section programs-section" aria-labelledby="programs-heading">
@@ -72,40 +74,36 @@
             <span class="section-number">02</span>
             <div>
               <h2 id="programs-heading">What interests you?</h2>
-              <p>Choose exactly three SICTC programs you’d like to learn more about.</p>
+              <p>Choose 3 programs that sound interesting.</p>
             </div>
           </div>
 
-          <fieldset class="program-picker" aria-describedby="program-count">
-            <legend>Select 3 programs <span class="required">*</span></legend>
-            <div class="program-options" id="program-options">
-              <label class="program-option"><input type="checkbox" value="Automotive"><span>🚘 Automotive</span></label>
-              <label class="program-option"><input type="checkbox" value="Diesel"><span>🚛 Diesel</span></label>
-              <label class="program-option"><input type="checkbox" value="Cosmotology"><span>💇 Cosmotology</span></label>
-              <label class="program-option"><input type="checkbox" value="Welding"><span>🔥 Welding</span></label>
-              <label class="program-option"><input type="checkbox" value="Advance Manufacturing"><span>⚙️ Advance Manufacturing</span></label>
-              <label class="program-option"><input type="checkbox" value="Precision Machine"><span>🔩 Precision Machine</span></label>
-              <label class="program-option"><input type="checkbox" value="Comp Sci"><span>💻 Comp Sci</span></label>
-              <label class="program-option"><input type="checkbox" value="Cybersecurity"><span>🔐 Cybersecurity</span></label>
-              <label class="program-option"><input type="checkbox" value="Engineering"><span>📐 Engineering</span></label>
-              <label class="program-option"><input type="checkbox" value="Health Careers"><span>🩺 Health Careers</span></label>
-              <label class="program-option"><input type="checkbox" value="Construction"><span>🏗️ Construction</span></label>
-              <label class="program-option"><input type="checkbox" value="Electrical"><span>⚡ Electrical</span></label>
-              <label class="program-option"><input type="checkbox" value="Graphic Media"><span>🎨 Graphic Media</span></label>
-              <label class="program-option"><input type="checkbox" value="Media Broadcasting"><span>🎥 Media Broadcasting</span></label>
+          <fieldset class="program-picker">
+            <legend>Programs <span class="required">*</span></legend>
+            <div class="program-options">
+              <label class="program-option"><input type="checkbox" name="programs[]" value="Automotive"><span>🚘 Automotive</span></label>
+              <label class="program-option"><input type="checkbox" name="programs[]" value="Diesel"><span>🚛 Diesel</span></label>
+              <label class="program-option"><input type="checkbox" name="programs[]" value="Cosmetology"><span>💇 Cosmetology</span></label>
+              <label class="program-option"><input type="checkbox" name="programs[]" value="Welding"><span>🔥 Welding</span></label>
+              <label class="program-option"><input type="checkbox" name="programs[]" value="Advanced Manufacturing"><span>⚙ Advanced Manufacturing</span></label>
+              <label class="program-option"><input type="checkbox" name="programs[]" value="Precision Machine"><span>🔩 Precision Machine</span></label>
+              <label class="program-option"><input type="checkbox" name="programs[]" value="Comp Sci"><span>💻 Comp Sci</span></label>
+              <label class="program-option"><input type="checkbox" name="programs[]" value="Cybersecurity"><span>🔐 Cybersecurity</span></label>
+              <label class="program-option"><input type="checkbox" name="programs[]" value="Engineering"><span>📐 Engineering</span></label>
+              <label class="program-option"><input type="checkbox" name="programs[]" value="Health Careers"><span>🩺 Health Careers</span></label>
+              <label class="program-option"><input type="checkbox" name="programs[]" value="Construction"><span>🏗 Construction</span></label>
+              <label class="program-option"><input type="checkbox" name="programs[]" value="Electrical"><span>⚡ Electrical</span></label>
+              <label class="program-option"><input type="checkbox" name="programs[]" value="Graphic Media"><span>🎨 Graphic Media</span></label>
+              <label class="program-option"><input type="checkbox" name="programs[]" value="Media Broadcasting"><span>🎥 Media Broadcasting</span></label>
             </div>
-            <p class="field-hint" id="program-count" aria-live="polite">0 of 3 selected</p>
           </fieldset>
-          <input type="hidden" name="program_1" id="program-1">
-          <input type="hidden" name="program_2" id="program-2">
-          <input type="hidden" name="program_3" id="program-3">
         </section>
 
-        <section class="form-section student-section" aria-labelledby="student-heading">
+        <section class="form-section student-section" aria-labelledby="questions-heading">
           <div class="section-heading">
             <span class="section-number">03</span>
             <div>
-              <h2 id="student-heading">A couple quick questions</h2>
+              <h2 id="questions-heading">A couple quick questions</h2>
               <p>Help us learn a little more about you.</p>
             </div>
           </div>
@@ -115,33 +113,33 @@
             <div class="radio-row">
               <label class="radio-option">
                 <input type="radio" name="evsc_student" value="yes" required>
-                <span class="radio-custom"></span>
+                <span class="radio-custom" aria-hidden="true"></span>
                 <span>Yes</span>
               </label>
               <label class="radio-option">
-                <input type="radio" name="evsc_student" value="no" required>
-                <span class="radio-custom"></span>
+                <input type="radio" name="evsc_student" value="no">
+                <span class="radio-custom" aria-hidden="true"></span>
                 <span>No</span>
               </label>
             </div>
           </fieldset>
 
-          <fieldset id="options-fair-field" class="choice-panel conditional-field" hidden>
+          <fieldset class="choice-panel">
             <legend>Did you see us at the Options Fair? <span class="required">*</span></legend>
             <div class="radio-row">
               <label class="radio-option">
-                <input type="radio" name="options_fair" value="yes">
-                <span class="radio-custom"></span>
+                <input type="radio" name="options_fair" value="yes" required>
+                <span class="radio-custom" aria-hidden="true"></span>
                 <span>Yes</span>
               </label>
               <label class="radio-option">
                 <input type="radio" name="options_fair" value="no">
-                <span class="radio-custom"></span>
+                <span class="radio-custom" aria-hidden="true"></span>
                 <span>No</span>
               </label>
               <label class="radio-option">
                 <input type="radio" name="options_fair" value="not_sure">
-                <span class="radio-custom"></span>
+                <span class="radio-custom" aria-hidden="true"></span>
                 <span>Not sure</span>
               </label>
             </div>
@@ -154,99 +152,9 @@
             <span>Submit my entry</span>
             <span class="button-arrow" aria-hidden="true">↗</span>
           </button>
-          <p class="privacy-note">Your information should only be used for this giveaway and related SICTC follow-up.</p>
         </div>
       </form>
     </section>
   </main>
-
-  <div id="form-alert" class="form-alert" role="status" aria-live="polite" hidden></div>
-
-  <script>
-    const form = document.getElementById('giveaway-form');
-    const optionsFairField = document.getElementById('options-fair-field');
-    const optionsFairInputs = [...document.querySelectorAll('input[name="options_fair"]')];
-    const evscStudentInputs = [...document.querySelectorAll('input[name="evsc_student"]')];
-    const programOptions = [...document.querySelectorAll('#program-options input[type="checkbox"]')];
-    const programCount = document.getElementById('program-count');
-    const programInputs = [1, 2, 3].map((number) => document.getElementById(`program-${number}`));
-    const formAlert = document.getElementById('form-alert');
-    const submitButton = form.querySelector('button[type="submit"]');
-    const privacyNote = form.querySelector('.privacy-note');
-    const googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycbwjAxIVR1YkuGg3ndz47h8uXieunc9lsRlerNPayn4u4iprEZOp2X1iLcO1EishqUknzg/exec';
-    let alertTimeout;
-
-    function showFormAlert(message, isError = false) {
-      clearTimeout(alertTimeout);
-      formAlert.textContent = message;
-      formAlert.classList.toggle('error', isError);
-      formAlert.hidden = false;
-      alertTimeout = setTimeout(() => {
-        formAlert.hidden = true;
-      }, 5000);
-    }
-
-    function updateOptionsFairQuestion() {
-      const isEvscStudent = document.querySelector('input[name="evsc_student"]:checked')?.value === 'yes';
-      optionsFairField.hidden = !isEvscStudent;
-      optionsFairInputs.forEach((input) => {
-        input.required = isEvscStudent;
-        if (!isEvscStudent) input.checked = false;
-      });
-    }
-
-    evscStudentInputs.forEach((input) => input.addEventListener('change', updateOptionsFairQuestion));
-    updateOptionsFairQuestion();
-
-    function updateProgramChoices(event) {
-      if (event?.target.checked && programOptions.filter((input) => input.checked).length > 3) {
-        event.target.checked = false;
-      }
-      const selectedPrograms = programOptions.filter((input) => input.checked).map((input) => input.value);
-
-      programInputs.forEach((input, index) => {
-        input.value = selectedPrograms[index] || '';
-      });
-      programOptions.forEach((input) => {
-        input.disabled = selectedPrograms.length === 3 && !input.checked;
-      });
-      programCount.textContent = `${selectedPrograms.length} of 3 selected`;
-      programOptions[0].setCustomValidity(selectedPrograms.length === 3 ? '' : 'Select exactly 3 programs.');
-    }
-
-    programOptions.forEach((input) => input.addEventListener('change', updateProgramChoices));
-    updateProgramChoices();
-
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      updateProgramChoices();
-      if (!form.reportValidity()) return;
-
-      if (!googleAppsScriptUrl) {
-        showFormAlert('This form is not connected yet. Set the Google Apps Script web app URL after deployment.', true);
-        return;
-      }
-
-      submitButton.disabled = true;
-
-      try {
-        await fetch(googleAppsScriptUrl, {
-          method: 'POST',
-          mode: 'no-cors',
-          body: new URLSearchParams(new FormData(form))
-        });
-        form.reset();
-        updateOptionsFairQuestion();
-        updateProgramChoices();
-        privacyNote.hidden = false;
-        showFormAlert('Form submitted, you will receive an email soon regarding your T-Shirt.');
-      } catch (error) {
-        privacyNote.hidden = false;
-        showFormAlert('We could not send your entry. Please check your connection and try again.', true);
-      } finally {
-        submitButton.disabled = false;
-      }
-    });
-  </script>
 </body>
 </html>

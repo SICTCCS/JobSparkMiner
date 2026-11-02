@@ -706,7 +706,7 @@ h1 span, .page-footer span { color: var(--brand-green); }
   gap: 8px 12px;
 }
 .field { margin-bottom: 0; }
-.field > label, .choice-panel legend {
+.field > label, .choice-panel legend, .program-picker legend {
   margin-bottom: 4px;
   color: var(--text);
   font-size: 11px;
