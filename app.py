@@ -5,8 +5,8 @@ app = Flask(__name__)
 
 db_config = {
     "host": "127.0.0.1",
-    "user": "root",          # Change to your DB user
-    "password": "password",  # Change to your DB password
+    "user": "user",          # Change to your DB user
+    "password": "user",  # Change to your DB password
     "database": "sictc_giveaway",
     "port": 3306
 }
